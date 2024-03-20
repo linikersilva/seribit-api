@@ -4,7 +4,7 @@ import com.example.seribit.dto.ProductDTO;
 import com.example.seribit.dto.javaxgroups.AllAttributesNullCheckGroup;
 import com.example.seribit.entity.Client;
 import com.example.seribit.entity.Product;
-import com.example.seribit.exception.handler.EntityNotFoundException;
+import com.example.seribit.exception.EntityNotFoundException;
 import com.example.seribit.mapper.ProductMapper;
 import com.example.seribit.repository.ProductRepository;
 import jakarta.persistence.EntityExistsException;

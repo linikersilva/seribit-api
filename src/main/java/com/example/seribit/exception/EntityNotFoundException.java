@@ -1,4 +1,4 @@
-package com.example.seribit.exception.handler;
+package com.example.seribit.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

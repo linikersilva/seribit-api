@@ -3,7 +3,7 @@ package com.example.seribit.service;
 import com.example.seribit.dto.EmployeeDTO;
 import com.example.seribit.dto.javaxgroups.AllAttributesNullCheckGroup;
 import com.example.seribit.entity.Employee;
-import com.example.seribit.exception.handler.EntityNotFoundException;
+import com.example.seribit.exception.EntityNotFoundException;
 import com.example.seribit.mapper.EmployeeMapper;
 import com.example.seribit.repository.EmployeeRepository;
 import jakarta.validation.ConstraintViolation;

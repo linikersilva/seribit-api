@@ -1,5 +1,7 @@
 package com.example.seribit.exception.handler;
 
+import com.example.seribit.exception.BusinessRuleException;
+import com.example.seribit.exception.EntityNotFoundException;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(EntityExistsException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     protected ResponseEntity<Object> handleEntityExistsException(EntityExistsException ex) {
+        return handleExceptionInternal(ex.getMessage(), new HttpHeaders(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    protected ResponseEntity<Object> handleBusinessRuleException(BusinessRuleException ex) {
         return handleExceptionInternal(ex.getMessage(), new HttpHeaders(), HttpStatus.FORBIDDEN);
     }
 
