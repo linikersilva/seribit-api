@@ -3,16 +3,17 @@ package com.example.seribit.dto;
 import com.example.seribit.dto.javaxgroups.AllAttributesNullCheckGroup;
 import com.example.seribit.dto.javaxgroups.CreateGroup;
 import com.example.seribit.dto.javaxgroups.UpdateGroup;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class ClientDTO {
+public class EmployeeDTO {
 
     @NotEmpty(message = "O campo name não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
     @Size(max = 50, message = "O campo name não pode ter mais que 50 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
@@ -22,9 +23,22 @@ public class ClientDTO {
     @Size(max = 50, message = "O campo email não pode ter mais que 50 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
     private String email;
 
-    @NotEmpty(message = "O campo cpfCnpj não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
-    @Size(max = 14, message = "O campo cpfCnpj não pode ter mais que 14 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
-    private String cpfCnpj;
+    @NotEmpty(message = "O campo cpf não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
+    @Size(max = 11, message = "O campo cpf não pode ter mais que 11 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
+    private String cpf;
+
+    @NotEmpty(message = "O campo user não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
+    @Size(min = 10, max = 10, message = "O campo user deve ter 10 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
+    private String user;
+
+    @NotEmpty(message = "O campo password não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
+    @Size(max = 15, message = "O campo password não pode ter mais que 15 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})
+    private String password;
+
+    @NotNull(message = "O campo salary não pode ser nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
+    @DecimalMin(value = "0.0", inclusive = false, message = "O campo salary deve ser maior que zero.", groups = {CreateGroup.class, UpdateGroup.class})
+    @Digits(integer=6, fraction=2, message = "O campo salary deve ter no máximo 6 dígitos antes da vírgula e 2 dígitos depois dela.", groups = {CreateGroup.class, UpdateGroup.class})
+    private BigDecimal salary;
 
     @NotEmpty(message = "O campo street não pode ser vazio ou nulo.", groups = {CreateGroup.class, AllAttributesNullCheckGroup.class})
     @Size(max = 30, message = "O campo street não pode ter mais que 30 caracteres.", groups = {CreateGroup.class, UpdateGroup.class})

@@ -19,18 +19,18 @@ public class ClientMapper {
     public Client mapFromDtoToEntity(ClientDTO clientDTO) {
         Client client = modelMapper.map(clientDTO, Client.class);
         client.setAddress(Address.builder()
-                              .street(clientDTO.getStreet())
-                              .number(clientDTO.getNumber())
-                              .neighborhood(clientDTO.getNeighborhood())
-                              .state(clientDTO.getState().toUpperCase())
-                              .cep(clientDTO.getCep())
-                              .complement(clientDTO.getComplement())
-                              .build()
+                                 .street(clientDTO.getStreet())
+                                 .number(clientDTO.getNumber())
+                                 .neighborhood(clientDTO.getNeighborhood())
+                                 .state(clientDTO.getState().toUpperCase())
+                                 .cep(clientDTO.getCep())
+                                 .complement(clientDTO.getComplement())
+                                 .build()
         );
         client.setPhone(Phone.builder()
-                          .phone(clientDTO.getPhone())
-                          .ddd(clientDTO.getDdd())
-                          .build()
+                             .phone(clientDTO.getPhone())
+                             .ddd(clientDTO.getDdd())
+                             .build()
         );
         return client;
     }
