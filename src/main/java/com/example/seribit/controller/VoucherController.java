@@ -2,7 +2,6 @@ package com.example.seribit.controller;
 
 import com.example.seribit.dto.VoucherDTO;
 import com.example.seribit.dto.javaxgroups.CreateGroup;
-import com.example.seribit.dto.javaxgroups.UpdateGroup;
 import com.example.seribit.entity.Voucher;
 import com.example.seribit.service.VoucherService;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +43,6 @@ public class VoucherController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(newVoucher);
-    }
-
-    @PutMapping("/{voucherId}")
-    public ResponseEntity<VoucherDTO> updateVoucher(@PathVariable Integer voucherId,
-                                                    @RequestBody
-                                                    @Validated(UpdateGroup.class)
-                                                    VoucherDTO voucherDTO) {
-        return ResponseEntity.ok().body(voucherService.updateVoucher(voucherId, voucherDTO));
     }
 
     @DeleteMapping("/{voucherId}")

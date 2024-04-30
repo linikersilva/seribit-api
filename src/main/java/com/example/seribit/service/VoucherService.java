@@ -1,20 +1,16 @@
 package com.example.seribit.service;
 
 import com.example.seribit.dto.VoucherDTO;
-import com.example.seribit.dto.javaxgroups.AllAttributesNullCheckGroup;
 import com.example.seribit.entity.Product;
 import com.example.seribit.entity.Voucher;
 import com.example.seribit.exception.EntityNotFoundException;
 import com.example.seribit.mapper.VoucherMapper;
 import com.example.seribit.repository.VoucherRepository;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +20,6 @@ public class VoucherService {
     private final VoucherRepository voucherRepository;
     private final ProductService productService;
     private final VoucherMapper voucherMapper;
-    private final Validator validator;
 
     public VoucherDTO getVoucherDTOById(Integer voucherId) {
         Voucher voucher = getVoucherById(voucherId);
@@ -69,31 +64,6 @@ public class VoucherService {
         voucherDTO.setProductId(newVoucher.getProduct().getProductId());
 
         return voucherDTO;
-    }
-
-    public VoucherDTO updateVoucher(Integer voucherId, VoucherDTO voucherDTO) {
-        Voucher voucher = getVoucherById(voucherId);
-
-        if (!allAttributesAreNull(voucherDTO)) {
-            Product product = productService.getProductById(voucherDTO.getProductId());
-            voucherMapper.updateEntity(voucherDTO, voucher, product);
-        }
-
-        Voucher updatedVoucher = voucherRepository.save(voucher);
-
-        return VoucherDTO.builder()
-                         .voucherId(updatedVoucher.getVoucherId())
-                         .total(updatedVoucher.getTotal())
-                         .quantity(updatedVoucher.getQuantity())
-                         .productId(updatedVoucher.getProduct().getProductId())
-                         .build();
-    }
-
-    private boolean allAttributesAreNull(VoucherDTO voucherDTO) {
-        Set<ConstraintViolation<VoucherDTO>> violations =
-                validator.validate(voucherDTO, AllAttributesNullCheckGroup.class);
-
-        return violations.size() == 3;
     }
 
     public void deleteVoucher(Integer voucherId) {

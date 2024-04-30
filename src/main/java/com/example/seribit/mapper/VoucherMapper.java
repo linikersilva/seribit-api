@@ -23,10 +23,4 @@ public class VoucherMapper {
         voucher.setTotal(product.getPrice().multiply(BigDecimal.valueOf(voucherDTO.getQuantity())));
         return voucher;
     }
-
-    public void updateEntity(VoucherDTO voucherDTO, Voucher voucher, Product product) {
-        voucher.setTotal(voucherDTO.getTotal());
-        voucher.setQuantity(voucher.getQuantity());
-        voucher.setProduct(product);
-    }
 }
